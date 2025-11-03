@@ -111,7 +111,7 @@ function TopBar() {
     <div className="w-full flex items-center justify-between py-3">
       <div className="flex items-center gap-3">
         <Layers className="w-5 h-5" />
-        <h1 className="text-xl font-semibold">Haldiram Control Room</h1>
+        <h1 className="text-xl font-semibold">Haldiram's Frozen Snacks Plant - Control Room</h1>
         <Badge variant="secondary" className="rounded-2xl">Live</Badge>
       </div>
       <div className="flex items-center gap-2">
@@ -301,7 +301,10 @@ function ColdStorageGrid({ grid }:{ grid:any[][] }){
     <>
       <Card className="shadow-sm">
         <CardHeader className="pb-3 flex items-center justify-between">
-          <CardTitle className="text-sm font-semibold">Cold storage - location & FIFO</CardTitle>
+          <div>
+            <CardTitle className="text-sm font-semibold">Cold storage - location & FIFO</CardTitle>
+            <p className="text-xs text-slate-500 mt-1">Click on any card to view location details</p>
+          </div>
           <Badge variant="outline" className="rounded-2xl text-xs">TG-3 locator</Badge>
         </CardHeader>
         <CardContent>
