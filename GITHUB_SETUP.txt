@@ -52,7 +52,7 @@ This will create a gh-pages branch and deploy your dashboard.
 4. Save
 
 Your site will be live at:
-https://YOUR_USERNAME.github.io/haldiram-control-room/
+https://Prathamesh-Soaire.github.io/haldiram-control-room/
 
 ====================================================================
   NEED DETAILED HELP?
