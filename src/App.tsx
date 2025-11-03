@@ -388,7 +388,7 @@ function PlantMapView(){
           {active && (
             <div className="absolute top-3 right-3 w-80 bg-white rounded-2xl border shadow-xl p-3">
               <div className="flex items-start justify-between">
-                <div>
+      <div>
                   <div className="text-sm font-semibold">{active.batch} <span className="text-slate-400">· {active.sku}</span></div>
                   <div className="text-xs text-slate-500">At {active.at} - {active.gate}</div>
                 </div>
@@ -443,11 +443,11 @@ export default function App(){
             <OEETrend data={oeeTrend}/>
           </div>
           <SectionHealth/>
+          <ColdStorageGrid grid={coldGrid}/>
         </div>
 
         <div className="space-y-4">
           <AlarmPanel/>
-          <ColdStorageGrid grid={coldGrid}/>
           <Card className="shadow-sm">
             <CardHeader className="pb-2"><CardTitle className="text-sm">Gate filters</CardTitle></CardHeader>
             <CardContent className="flex items-center gap-2">
