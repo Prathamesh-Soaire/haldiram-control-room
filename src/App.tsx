@@ -338,14 +338,9 @@ function ColdStorageGrid({ grid }:{ grid:any[][] }){
             </div>
             <div className="p-4 overflow-auto max-h-[calc(90vh-100px)]">
               <img 
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80" 
+                src="/haldiram-control-room/Stock.jpeg" 
                 alt={`Cold storage location ${selectedCell.id}`}
                 className="w-full h-auto rounded-lg shadow-lg"
-                onError={(e) => {
-                  // Fallback if image fails to load
-                  const target = e.target as HTMLImageElement;
-                  target.src = "https://via.placeholder.com/800x600/1e293b/94a3b8?text=Cold+Storage+Facility";
-                }}
               />
               <div className="mt-4 p-4 bg-slate-50 rounded-lg">
                 <h4 className="font-medium mb-2">Location Details</h4>
