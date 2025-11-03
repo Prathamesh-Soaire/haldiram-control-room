@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AlertTriangle, Activity, Layers, Package, PlayCircle, StopCircle, RefreshCw, CircleDot, Clock, Camera, QrCode, Filter, Settings2 } from "lucide-react";
+import { AlertTriangle, Activity, Layers, Package, PlayCircle, StopCircle, RefreshCw, CircleDot, Clock, Camera, QrCode, Filter, Settings2, X } from "lucide-react";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RTooltip, LineChart, Line, Legend } from "recharts";
 
 // ---------- helper types ----------
@@ -295,26 +295,88 @@ function AlarmPanel(){
 }
 
 function ColdStorageGrid({ grid }:{ grid:any[][] }){
+  const [selectedCell, setSelectedCell] = useState<any | null>(null);
+  
   return (
-    <Card className="shadow-sm">
-      <CardHeader className="pb-3 flex items-center justify-between">
-        <CardTitle className="text-sm font-semibold">Cold storage - location & FIFO</CardTitle>
-        <Badge variant="outline" className="rounded-2xl text-xs">TG-3 locator</Badge>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-10 gap-2">
-          {grid.flat().map((cell:any) => (
-            <div key={cell.id} className="aspect-square border rounded-lg flex flex-col items-center justify-center p-2 hover:border-blue-500 hover:shadow-md transition-all bg-white">
-              <div className="text-center w-full">
-                <div className="font-bold text-[10px] text-slate-700 mb-1">{cell.id}</div>
-                <div className="text-[9px] font-medium text-slate-600 mb-1 truncate w-full">{cell.sku || "-"}</div>
-                <div className={`text-xs font-bold ${cell.age > 48 ? "text-red-600" : cell.age > 24 ? "text-amber-600" : "text-slate-500"}`}>{cell.age}h</div>
+    <>
+      <Card className="shadow-sm">
+        <CardHeader className="pb-3 flex items-center justify-between">
+          <CardTitle className="text-sm font-semibold">Cold storage - location & FIFO</CardTitle>
+          <Badge variant="outline" className="rounded-2xl text-xs">TG-3 locator</Badge>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-10 gap-2">
+            {grid.flat().map((cell:any) => (
+              <button 
+                key={cell.id}
+                onClick={() => setSelectedCell(cell)}
+                className="aspect-square border rounded-lg flex flex-col items-center justify-center p-2 hover:border-blue-500 hover:shadow-md transition-all bg-white cursor-pointer"
+              >
+                <div className="text-center w-full">
+                  <div className="font-bold text-[10px] text-slate-700 mb-1">{cell.id}</div>
+                  <div className="text-[9px] font-medium text-slate-600 mb-1 truncate w-full">{cell.sku || "-"}</div>
+                  <div className={`text-xs font-bold ${cell.age > 48 ? "text-red-600" : cell.age > 24 ? "text-amber-600" : "text-slate-500"}`}>{cell.age}h</div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Image Modal */}
+      {selectedCell && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setSelectedCell(null)}>
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-4 border-b">
+              <div>
+                <h3 className="font-semibold text-lg">Cold Storage Location: {selectedCell.id}</h3>
+                <p className="text-sm text-slate-600">SKU: {selectedCell.sku || "Empty"} • Age: {selectedCell.age}h</p>
+              </div>
+              <Button variant="ghost" size="icon" onClick={() => setSelectedCell(null)}>
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+            <div className="p-4 overflow-auto max-h-[calc(90vh-100px)]">
+              <img 
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80" 
+                alt={`Cold storage location ${selectedCell.id}`}
+                className="w-full h-auto rounded-lg shadow-lg"
+                onError={(e) => {
+                  // Fallback if image fails to load
+                  const target = e.target as HTMLImageElement;
+                  target.src = "https://via.placeholder.com/800x600/1e293b/94a3b8?text=Cold+Storage+Facility";
+                }}
+              />
+              <div className="mt-4 p-4 bg-slate-50 rounded-lg">
+                <h4 className="font-medium mb-2">Location Details</h4>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-slate-600">Location ID:</span>
+                    <span className="ml-2 font-medium">{selectedCell.id}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-600">Product:</span>
+                    <span className="ml-2 font-medium">{selectedCell.sku || "Empty"}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-600">Storage Age:</span>
+                    <span className={`ml-2 font-medium ${selectedCell.age > 48 ? "text-red-600" : selectedCell.age > 24 ? "text-amber-600" : "text-slate-500"}`}>
+                      {selectedCell.age} hours
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-slate-600">FIFO Status:</span>
+                    <span className={`ml-2 font-medium ${selectedCell.age > 48 ? "text-red-600" : selectedCell.age > 24 ? "text-amber-600" : "text-green-600"}`}>
+                      {selectedCell.age > 48 ? "Critical" : selectedCell.age > 24 ? "Warning" : "OK"}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </CardContent>
-    </Card>
+      )}
+    </>
   );
 }
 
@@ -367,7 +429,7 @@ function PlantMapView(){
 
           {/* stations */}
           {nodes.map(n => (
-            <div key={n.name} className="absolute -translate-x-1/2 -translate-y-1/2 text-[10px] text-center" style={{ left: `${n.x}%`, top: `${n.y}%` }}>
+            <div key={n.name} className="absolute -translate-x-1/2 text-[10px] text-center" style={{ left: `${n.x}%`, top: `${n.y}%` }}>
               <div className="w-2 h-2 rounded-full bg-slate-500 mx-auto mb-1"></div>
               <div className="bg-white/90 px-1 py-0.5 rounded border shadow-sm whitespace-nowrap">{n.name}</div>
             </div>
