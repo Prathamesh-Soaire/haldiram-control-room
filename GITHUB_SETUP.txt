@@ -1,0 +1,65 @@
+====================================================================
+  GITHUB PAGES DEPLOYMENT INSTRUCTIONS
+====================================================================
+
+Your git repository is already initialized, but you need to update
+the remote URL with your actual GitHub repository.
+
+====================================================================
+  STEP 1: Create GitHub Repository
+====================================================================
+
+1. Go to: https://github.com/new
+2. Repository name: haldiram-control-room
+3. Make it PUBLIC (required for free GitHub Pages)
+4. Click "Create repository"
+5. DO NOT initialize with README or .gitignore
+
+====================================================================
+  STEP 2: Update Remote URL
+====================================================================
+
+Replace YOUR_USERNAME with your actual GitHub username:
+
+git remote set-url origin https://github.com/YOUR_USERNAME/haldiram-control-room.git
+
+Example:
+git remote set-url origin https://github.com/johnsmith/haldiram-control-room.git
+
+====================================================================
+  STEP 3: Push Your Code
+====================================================================
+
+git add .
+git commit -m "Initial commit: Haldiram Control Room dashboard"
+git push -u origin main
+
+====================================================================
+  STEP 4: Deploy to GitHub Pages
+====================================================================
+
+npm run deploy
+
+This will create a gh-pages branch and deploy your dashboard.
+
+====================================================================
+  STEP 5: Enable GitHub Pages
+====================================================================
+
+1. Go to your repository on GitHub
+2. Settings → Pages
+3. Source: gh-pages branch
+4. Save
+
+Your site will be live at:
+https://YOUR_USERNAME.github.io/haldiram-control-room/
+
+====================================================================
+  NEED DETAILED HELP?
+====================================================================
+
+Read: DEPLOY_TO_GITHUB.md for complete instructions with
+screenshots and troubleshooting.
+
+====================================================================
+

@@ -93,12 +93,29 @@ netlify deploy --prod
 
 #### Deploy to GitHub Pages
 
+All set up! Just run:
+```bash
+npm run deploy
+```
+
+Or see `DEPLOY_TO_GITHUB.md` for detailed instructions.
+
+Quick steps:
+1. Create a GitHub repository (make it Public)
+2. Update remote URL: `git remote set-url origin https://github.com/YOUR_USERNAME/repo-name.git`
+3. Push: `git push -u origin main`
+4. Deploy: `npm run deploy`
+5. Enable Pages in repository Settings
+
+Your site will be live at `https://YOUR_USERNAME.github.io/repo-name/`
+
+#### GitHub Pages Alternative (Manual)
 1. Build the project:
 ```bash
 npm run build
 ```
 
-2. Install gh-pages:
+2. Install gh-pages (already installed):
 ```bash
 npm install --save-dev gh-pages
 ```
