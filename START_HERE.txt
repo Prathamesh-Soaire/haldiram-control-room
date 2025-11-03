@@ -1,0 +1,40 @@
+====================================================================
+  HALDIRAM CONTROL ROOM DASHBOARD - QUICK START
+====================================================================
+
+TO VIEW YOUR DASHBOARD IN BROWSER:
+
+  1. Open Terminal/Command Prompt in this folder
+  
+  2. Run:  npm run build
+  
+  3. Run:  npm run preview
+  
+  4. Copy the URL it shows (e.g., http://localhost:4173)
+  
+  5. Paste that URL in ANY web browser!
+
+
+THAT'S IT! Your dashboard will open and work in the browser.
+
+
+====================================================================
+  NEED MORE HELP?
+====================================================================
+
+Read these files for more details:
+  - SHOWCASE.md      - Simple showcase instructions
+  - SUMMARY.md       - Quick overview
+  - README.md        - Full documentation
+  - QUICK_START.md   - Deployment options
+
+====================================================================
+  TROUBLESHOOTING
+====================================================================
+
+If port is busy, just use the port number it shows you.
+
+If you need to rebuild: npm run build && npm run preview
+
+====================================================================
+
