@@ -246,12 +246,12 @@ function SectionHealth() {
   return (
     <Card className="shadow-sm">
       <CardHeader className="pb-2"><CardTitle className="text-sm">Section status</CardTitle></CardHeader>
-      <CardContent className="grid grid-cols-2 md:grid-cols-5 gap-3">
+      <CardContent className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10 gap-3">
         {health.map(s => (
-          <div key={s.name} className="flex items-center justify-between p-3 rounded-xl border">
-            <span className="text-sm font-medium">{s.name}</span>
-            <div className="flex items-center gap-3">
-              <Badge variant="outline" className="rounded-2xl">WIP {s.wip}</Badge>
+          <div key={s.name} className="flex flex-col items-center justify-center p-3 rounded-xl border hover:bg-slate-50 transition-colors">
+            <div className="text-xs font-medium text-center mb-2">{s.name}</div>
+            <div className="flex items-center gap-2 flex-col">
+              <Badge variant="outline" className="rounded-full text-xs">WIP {s.wip}</Badge>
               <TrafficLight value={s.status as any}/>
             </div>
           </div>
@@ -297,18 +297,18 @@ function AlarmPanel(){
 function ColdStorageGrid({ grid }:{ grid:any[][] }){
   return (
     <Card className="shadow-sm">
-      <CardHeader className="pb-2 flex items-center justify-between">
-        <CardTitle className="text-sm">Cold storage - location & FIFO</CardTitle>
-        <Badge variant="outline" className="rounded-2xl">TG-3 locator</Badge>
+      <CardHeader className="pb-3 flex items-center justify-between">
+        <CardTitle className="text-sm font-semibold">Cold storage - location & FIFO</CardTitle>
+        <Badge variant="outline" className="rounded-2xl text-xs">TG-3 locator</Badge>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-10 gap-1">
+        <div className="grid grid-cols-10 gap-2">
           {grid.flat().map((cell:any) => (
-            <div key={cell.id} className="aspect-square border rounded-md flex items-center justify-center text-[10px] p-1">
-              <div className="text-center">
-                <div className="font-medium">{cell.id}</div>
-                <div>{cell.sku || "-"}</div>
-                <div className={`text-xs ${cell.age > 48 ? "text-red-600" : cell.age > 24 ? "text-amber-600" : "text-slate-500"}`}>{cell.age}h</div>
+            <div key={cell.id} className="aspect-square border rounded-lg flex flex-col items-center justify-center p-2 hover:border-blue-500 hover:shadow-md transition-all bg-white">
+              <div className="text-center w-full">
+                <div className="font-bold text-[10px] text-slate-700 mb-1">{cell.id}</div>
+                <div className="text-[9px] font-medium text-slate-600 mb-1 truncate w-full">{cell.sku || "-"}</div>
+                <div className={`text-xs font-bold ${cell.age > 48 ? "text-red-600" : cell.age > 24 ? "text-amber-600" : "text-slate-500"}`}>{cell.age}h</div>
               </div>
             </div>
           ))}
@@ -442,8 +442,6 @@ export default function App(){
             <YieldByProcess data={yieldByStep}/>
             <OEETrend data={oeeTrend}/>
           </div>
-          <SectionHealth/>
-          <ColdStorageGrid grid={coldGrid}/>
         </div>
 
         <div className="space-y-4">
@@ -470,6 +468,12 @@ export default function App(){
             </CardContent>
           </Card>
         </div>
+      </div>
+
+      {/* Full-width sections */}
+      <div className="space-y-4">
+        <SectionHealth/>
+        <ColdStorageGrid grid={coldGrid}/>
       </div>
 
       {/* Map view - per item manufacturing line */}
