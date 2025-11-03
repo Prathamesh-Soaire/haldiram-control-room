@@ -2,6 +2,10 @@
 
 A modern React dashboard for real-time manufacturing control and monitoring. Built with Vite, TypeScript, Tailwind CSS, and shadcn/ui components.
 
+## 🌐 Live Demo
+
+**View the live dashboard:** [https://prathamesh-soaire.github.io/haldiram-control-room/](https://prathamesh-soaire.github.io/haldiram-control-room/)
+
 ## 🎯 Quick Start - View in Browser
 
 ```bash
